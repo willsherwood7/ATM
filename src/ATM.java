@@ -2,6 +2,14 @@ import java.util.*;
 
 public class ATM {
 	
+	public static void main (String [] args) {
+		ATM testy1 = new ATM();
+		
+		testy1.openAccount(1);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 0.0");
+	}
+	
 	private HashMap<Integer, Double> accounts;
 
 	public ATM () {
@@ -14,7 +22,8 @@ public class ATM {
 	}
 	
 	public void openAccount(int accountNumber, double initialAmount) {
-		accounts.put(accountNumber, initialAmount);
+		double roundedAmount = Math.round(initialAmount * 100.0) / 100.0;
+		accounts.put(accountNumber, roundedAmount);
 	}
 	
 	public void closeAccount(int accountNumber) {
@@ -30,20 +39,33 @@ public class ATM {
 		}
 	}
 	
-	public boolean withdrawMoney(int accountNumber, double withdrawAmount) {
-		double balance;
-		if (accounts.get(accountNumber) != null) {
-			balance = accounts.get(accountNumber);
-		}
-		else {
+	public boolean depositMoney(int accountNumber, double depositAmount) {
+		if (depositAmount < 0) {
 			return false;
 		}
-		balance =- withdrawAmount;
-		if (withdrawAmount >= 0) {
+		if (accounts.get(accountNumber) == null) {
+			return false;
+		}
+		double newValue = accounts.get(accountNumber) + depositAmount;
+		newValue = Math.round(newValue * 100.0) / 100.0;
+		accounts.replace(accountNumber, newValue);
+		return true;
+	}
+	
+	public boolean withdrawMoney(int accountNumber, double withdrawAmount) {
+		if (withdrawAmount < 0) {
+			return false;
+		}
+		if (accounts.get(accountNumber) == null) {
+			return false;
+		}
+		double balance = accounts.get(accountNumber);
+		balance = balance - withdrawAmount;
+		balance = Math.round(balance * 100.0) / 100.0;
+		if (balance >= 0) {
 			accounts.replace(accountNumber, balance);
 			return true;
 		}
 		return false;
 	}
-	
 }
