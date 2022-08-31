@@ -8,7 +8,7 @@ public class ATM {
 		testy1.openAccount(1);
 		System.out.println(testy1.checkBalance(1));
 		System.out.println("Should be 0.0");
-		testy1.closeAccount(1);s
+		testy1.closeAccount(1);
 		System.out.println(testy1.withdrawMoney(1, 238.3));
 		System.out.println("Should be false");
 	}
@@ -30,7 +30,9 @@ public class ATM {
 	}
 	
 	public void closeAccount(int accountNumber) {
-		accounts.remove(accountNumber);
+		if (accounts.get(accountNumber) != null && (accounts.get(accountNumber) == 0)) {
+			accounts.remove(accountNumber);
+		}
 	}
 	
 	public double checkBalance(int accountNumber) {
