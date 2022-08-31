@@ -11,6 +11,27 @@ public class ATM {
 		testy1.closeAccount(1);
 		System.out.println(testy1.withdrawMoney(1, 238.3));
 		System.out.println("Should be false");
+		testy1.openAccount(1);
+		testy1.depositMoney(1, 33.33);
+		testy1.closeAccount(1);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 33.33");
+		testy1.withdrawMoney(1, 34.44);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 33.33");
+		testy1.withdrawMoney(1, -33.33);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 33.33");
+		testy1.withdrawMoney(1, 33.33);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 0.0");
+		testy1.closeAccount(1);
+		System.out.println(testy1.checkBalance(1));
+		System.out.println("Should be 0.0");
+		System.out.println(testy1.depositMoney(1, 45.55));
+		System.out.println("Should be false");
+		
+		
 	}
 	
 	private HashMap<Integer, Double> accounts;
