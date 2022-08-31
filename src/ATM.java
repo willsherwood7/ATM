@@ -8,6 +8,9 @@ public class ATM {
 		testy1.openAccount(1);
 		System.out.println(testy1.checkBalance(1));
 		System.out.println("Should be 0.0");
+		testy1.closeAccount(1);s
+		System.out.println(testy1.withdrawMoney(1, 238.3));
+		System.out.println("Should be false");
 	}
 	
 	private HashMap<Integer, Double> accounts;
